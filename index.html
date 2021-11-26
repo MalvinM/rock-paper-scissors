@@ -1,0 +1,17 @@
+<script>
+    let choices = ["rock", "paper", "scissors"];
+    let computerChoice = choices[Math.floor(Math.random() * choices.length)];
+    let userChoice = prompt("Rock, Paper or Scissors").toLowerCase();
+
+    if (userChoice === computerChoice) {
+        console.log("It is a tie!")
+        // start of user choices
+    } else if ((userChoice === "rock") && (computerChoice === "scissors")) {
+        console.log("Rock crushes scissors. User wins!")
+    } else if ((userChoice === "paper") && (computerChoice === "rock")) {
+        console.log("Paper covers rock. User wins!")
+    } else if ((userChoice === "scissors") && (computerChoice === "paper")) {
+        console.log("Scissors cuts paper. User wins!")
+        // end of user choices
+    }
+</script>
