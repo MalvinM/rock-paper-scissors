@@ -2,7 +2,7 @@ let userScore = 0;
 let computerScore = 0;
 
 function playRound() {
-  let choices = ["rock", "paper", "scissors"];
+  const choices = ["rock", "paper", "scissors"];
   let computerChoice = choices[Math.floor(Math.random() * choices.length)];
   let userChoice = prompt("Rock, Paper or Scissors").toLowerCase();
   console.log(
