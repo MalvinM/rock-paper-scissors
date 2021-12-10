@@ -1,50 +1,56 @@
-let userScore = 0;
-let computerScore = 0;
+const gameChoices = ['rock', 'paper', 'scissors']
+let computerSelection;
+let playerSelection;
+let playerScore = 0;
+let computerScore= 0;
 
-function playRound() {
-  const choices = ["rock", "paper", "scissors"];
-  let computerChoice = choices[Math.floor(Math.random() * choices.length)];
-  let userChoice = prompt("Rock, Paper or Scissors").toLowerCase();
-  console.log(
-    "User chose " + userChoice + " and Computer chose " + computerChoice + "."
-  );
+function computerPlay() {
+  return gameChoices[Math.floor(Math.random() * gameChoices.length)];
+}
 
-  if (userChoice === computerChoice) {
-    console.log("It is a tie!");
-    // start of user win conditions
-  } else if (userChoice === "rock" && computerChoice === "scissors") {
-    console.log("Rock crushes scissors. User wins!");
-    userScore++;
-  } else if (userChoice === "paper" && computerChoice === "rock") {
+function userPlay() {
+  return prompt("Rock, Paper or Scissors").toLowerCase();
+}
+
+function playRound(playerSelection, computerSelection) {
+  computerSelection = computerPlay();
+  playerSelection = userPlay();
+  
+
+  // Determines whether player wins
+  if (playerSelection === computerSelection) {
+    console.log("It is a tie!")
+  } else if (playerSelection === "rock" && computerSelection === "scissors") {
+    console.log("Rock crushes scissors. User Wins!")
+    playerScore++;
+  } else if (playerSelection === "paper" && computerSelection === "rock") {
     console.log("Paper covers rock. User wins!");
-    userScore++;
-  } else if (userChoice === "scissors" && computerChoice === "paper") {
+    playerScore++;
+  } else if (playerSelection === "scissors" && computerSelection === "paper") {
     console.log("Scissors cuts paper. User wins!");
-    userScore++;
-    // end of user win conditions
+    playerScore++;
 
-    // start of computer win conditions
-  } else if (computerChoice === "rock" && userChoice === "scissors") {
+    // Determins whether the computer wins
+  } else if (computerSelection === "rock" && userChoice === "scissors") {
     console.log("Rock crushes scissors. Computer wins!");
     computerScore++;
-  } else if (computerChoice === "paper" && userChoice === "rock") {
+  } else if (computerSelection === "paper" && playerSelection === "rock") {
     console.log("Paper covers rock. Computer wins!");
     computerScore++;
-  } else if (computerChoice === "scissors" && userChoice === "paper") {
+  } else if (computerSelection === "scissors" && playerSelection === "paper") {
     console.log("Scissors cuts paper. Computer wins!");
     computerScore++;
   }
-  // end of computer win conditions
 }
 
-function scoreSheet() {
+function showScoreSheet() {
   console.log("Score:");
-  console.log("User: " + userScore);
+  console.log("User: " + playerScore);
   console.log("Computer: " + computerScore);
 
-  if (userScore === computerScore) {
+  if (playerScore === computerScore) {
     console.log("Game over. It is a tie!");
-  } else if (userScore > computerScore) {
+  } else if (playerScore > computerScore) {
     console.log("Game over. User wins!");
   } else {
     console.log("Game over. Computer wins!");
@@ -57,7 +63,7 @@ function game() {
   playRound();
   playRound();
   playRound();
-  scoreSheet();
+  showScoreSheet();
 }
 
 game();
