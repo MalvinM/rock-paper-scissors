@@ -13,8 +13,16 @@ function userPlay() {
 function playRound(playerSelection, computerSelection) {
   computerSelection = computerPlay();
   playerSelection = userPlay();
-  console.log(playerSelection);
-  console.log(computerSelection);
+  
+  if (playerSelection === computerSelection) {
+    console.log("It is a tie!")
+  } else if (playerSelection === "rock" && computerSelection === "scissors") {
+    console.log("Rock crushes scissors. User Wins!")
+  } else if (playerSelection === "paper" && computerSelection === "rock") {
+    console.log("Paper covers rock. User wins!");
+  } else if (playerSelection === "scissors" && computerSelection === "paper") {
+    console.log("Scissors cuts paper. User wins!");
+  }
 }
 
 playRound();
