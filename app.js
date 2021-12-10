@@ -1,63 +1,20 @@
-let userScore = 0;
-let computerScore = 0;
+const gameChoices = ['rock', 'paper', 'scissors']
+let computerSelection;
+let playerSelection;
 
-function playRound() {
-  const choices = ["rock", "paper", "scissors"];
-  let computerChoice = choices[Math.floor(Math.random() * choices.length)];
-  let userChoice = prompt("Rock, Paper or Scissors").toLowerCase();
-  console.log(
-    "User chose " + userChoice + " and Computer chose " + computerChoice + "."
-  );
-
-  if (userChoice === computerChoice) {
-    console.log("It is a tie!");
-    // start of user win conditions
-  } else if (userChoice === "rock" && computerChoice === "scissors") {
-    console.log("Rock crushes scissors. User wins!");
-    userScore++;
-  } else if (userChoice === "paper" && computerChoice === "rock") {
-    console.log("Paper covers rock. User wins!");
-    userScore++;
-  } else if (userChoice === "scissors" && computerChoice === "paper") {
-    console.log("Scissors cuts paper. User wins!");
-    userScore++;
-    // end of user win conditions
-
-    // start of computer win conditions
-  } else if (computerChoice === "rock" && userChoice === "scissors") {
-    console.log("Rock crushes scissors. Computer wins!");
-    computerScore++;
-  } else if (computerChoice === "paper" && userChoice === "rock") {
-    console.log("Paper covers rock. Computer wins!");
-    computerScore++;
-  } else if (computerChoice === "scissors" && userChoice === "paper") {
-    console.log("Scissors cuts paper. Computer wins!");
-    computerScore++;
-  }
-  // end of computer win conditions
+function computerPlay() {
+  return gameChoices[Math.floor(Math.random() * gameChoices.length)];
 }
 
-function scoreSheet() {
-  console.log("Score:");
-  console.log("User: " + userScore);
-  console.log("Computer: " + computerScore);
-
-  if (userScore === computerScore) {
-    console.log("Game over. It is a tie!");
-  } else if (userScore > computerScore) {
-    console.log("Game over. User wins!");
-  } else {
-    console.log("Game over. Computer wins!");
-  }
+function userPlay() {
+  return prompt("Rock, Paper or Scissors").toLowerCase();
 }
 
-function game() {
-  playRound();
-  playRound();
-  playRound();
-  playRound();
-  playRound();
-  scoreSheet();
+function playRound(playerSelection, computerSelection) {
+  computerSelection = computerPlay();
+  playerSelection = userPlay();
+  console.log(playerSelection);
+  console.log(computerSelection);
 }
 
-game();
+playRound();
