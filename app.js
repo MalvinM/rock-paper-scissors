@@ -1,9 +1,31 @@
-const gameChoices = ['rock', 'paper', 'scissors']
+const gameChoices = ['rock', 'paper', 'scissors'];
+const scoreLimit = 5;
+let results = document.querySelector('#results-container');
 let computerSelection;
 let playerSelection;
-let playerScore = 0;
-let computerScore= 0;
+let playerTempscore = 0;
+let computerTempScore= 0;
+let playRoundCounter = 0;
+let playerScore = document.getElementById("player-score");
+let computerScore = document.getElementById("computer-score");
+let roundResults = document.createElement('div');
 let buttons = document.querySelectorAll('.button');
+
+roundResults.classList.add('roundResults');
+
+function showResults() {
+  results.appendChild(roundResults);
+}
+
+function getplayerScore() {
+  playerTempscore++;
+  playerScore.innerHTML = playerTempscore;
+}
+
+function getComputerScore() {
+  computerTempScore++;
+  computerScore.innerHTML = computerTempScore
+}
 
 function computerPlay() {
   return gameChoices[Math.floor(Math.random() * gameChoices.length)];
@@ -17,41 +39,43 @@ function playRound(playerSelection, computerSelection) {
   computerSelection = computerPlay();
   // playerSelection = userPlay();
   
-
-  // Determines whether player wins
+ // Determines whether player wins
   if (playerSelection === computerSelection) {
-    console.log("It is a tie!")
+    roundResults.textContent = "It is a tie!";
+    //
   } else if (playerSelection === "rock" && computerSelection === "scissors") {
-    console.log("Rock crushes scissors. User Wins!")
-    playerScore++;
+    roundResults.textContent = "Rock crushes scissors. User Wins!";
+    getplayerScore();
   } else if (playerSelection === "paper" && computerSelection === "rock") {
-    console.log("Paper covers rock. User wins!");
-    playerScore++;
+    roundResults.textContent = "Paper covers rock. User wins!";
+    getplayerScore();
   } else if (playerSelection === "scissors" && computerSelection === "paper") {
-    console.log("Scissors cuts paper. User wins!");
-    playerScore++;
+    roundResults.textContent = "Scissors cuts paper. User wins!";
+    getplayerScore();
 
     // Determins whether the computer wins
   } else if (computerSelection === "rock" && playerSelection === "scissors") {
-    console.log("Rock crushes scissors. Computer wins!");
-    computerScore++;
+    roundResults.textContent = "Rock crushes scissors. Computer wins!";
+    getComputerScore();
   } else if (computerSelection === "paper" && playerSelection === "rock") {
-    console.log("Paper covers rock. Computer wins!");
-    computerScore++;
+    roundResults.textContent = "Paper covers rock. Computer wins!";
+    getComputerScore();
   } else if (computerSelection === "scissors" && playerSelection === "paper") {
-    console.log("Scissors cuts paper. Computer wins!");
-    computerScore++;
-  }
-}
+    roundResults.textContent = "Scissors cuts paper. Computer wins!";
+    getComputerScore();
+  } 
+  showResults();
+  playRoundCounter++;
+};
 
 function showScoreSheet() {
   console.log("Score:");
-  console.log("User: " + playerScore);
+  console.log("User: " + playerTempscore);
   console.log("Computer: " + computerScore);
 
-  if (playerScore === computerScore) {
+  if (playerTempscore === computerScore) {
     console.log("Game over. It is a tie!");
-  } else if (playerScore > computerScore) {
+  } else if (playerTempscore > computerScore) {
     console.log("Game over. User wins!");
   } else {
     console.log("Game over. Computer wins!");
@@ -72,8 +96,8 @@ buttons.forEach((button) => {
   const img = button.querySelector("img");
   playerSelection = img.alt;
 
-  playRound(playerSelection, computerSelection)
-  })
-})
-
-console.log(computerSelection)
+  if (computerTempScore < scoreLimit && playerTempscore < scoreLimit) {
+    playRound(playerSelection, computerSelection)
+  }
+  });
+});

@@ -6,10 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="app.js" defer></script>
     <link rel="stylesheet" href="./styles.css" />
+    <link href='https://fonts.googleapis.com/css?family=Caesar Dressing' rel='stylesheet'>
     <title>Rock, Paper, Scissors</title>
   </head>
   <body>
     <main id="main-content">
+        <h1 id="title">Do you have what it takes?</h1>
+        <p class="game-name" id="rps-name">
+            Super Ultimate Rock - Paper - Scissors
+        </p>
+        <p class="weaponSelect" id="weapon">
+            Choose your weapon
+        </p>
       <div id="container">
         <div id="btn-container">
           <div id="rock" class="button">
@@ -22,6 +30,17 @@
             <img src="scissors.png" alt="scissors" />
           </div>
         </div>
+        <div id="score-label">
+            <p class="label">you</p>
+            <p class="label">computer</p>
+        </div>
+        <div id="score-container">
+            <div class="score" id="player-score">0</div>
+            <div class="score" id="computer-score">0</div>
+        </div>
+        <div id="results-container"></div>
+      </div>
+
       </div>
     </main>
   </body>
