@@ -3,6 +3,7 @@ let computerSelection;
 let playerSelection;
 let playerScore = 0;
 let computerScore= 0;
+let buttons = document.querySelectorAll('.button');
 
 function computerPlay() {
   return gameChoices[Math.floor(Math.random() * gameChoices.length)];
@@ -14,7 +15,7 @@ function userPlay() {
 
 function playRound(playerSelection, computerSelection) {
   computerSelection = computerPlay();
-  playerSelection = userPlay();
+  // playerSelection = userPlay();
   
 
   // Determines whether player wins
@@ -31,7 +32,7 @@ function playRound(playerSelection, computerSelection) {
     playerScore++;
 
     // Determins whether the computer wins
-  } else if (computerSelection === "rock" && userChoice === "scissors") {
+  } else if (computerSelection === "rock" && playerSelection === "scissors") {
     console.log("Rock crushes scissors. Computer wins!");
     computerScore++;
   } else if (computerSelection === "paper" && playerSelection === "rock") {
@@ -66,4 +67,13 @@ function game() {
   showScoreSheet();
 }
 
-game();
+buttons.forEach((button) => {
+  button.addEventListener('click', () => {
+  const img = button.querySelector("img");
+  playerSelection = img.alt;
+
+  playRound(playerSelection, computerSelection)
+  })
+})
+
+console.log(computerSelection)
