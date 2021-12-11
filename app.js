@@ -98,6 +98,10 @@ buttons.forEach((button) => {
 
   if (computerTempScore < scoreLimit && playerTempscore < scoreLimit) {
     playRound(playerSelection, computerSelection)
+  } else if (playerTempscore > computerTempScore) {
+    roundResults.textContent = "You did it! You Win!"
+  } else {
+    roundResults.textContent = "Oh no! You have been defeated."
   }
   });
 });
