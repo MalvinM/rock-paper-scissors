@@ -15,8 +15,7 @@ function capitalize_FirstLetter(string) {
 
 function playRound(playerSelection, computerSelection) {
   playerSelection = prompt("Rock, Paper or Scissors?").toLowerCase();
-  /* computerSelection = get_computerChoice(); */
-  computerSelection = "Paper";
+  computerSelection = get_computerChoice();
 
   if ((playerSelection === "rock") & (computerSelection === "Paper")) {
     console.log(
