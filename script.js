@@ -2,11 +2,28 @@ let gameElements = ["Rock", "Paper", "Scissors"];
 let computerPoints = 0;
 let playerPoints = 0;
 let rounds = 0;
+let computerScore = 0;
+let playerScore = 0;
+let playerWin;
 
 function get_computerChoice() {
   const computerSelection =
     gameElements[Math.floor(Math.random() * gameElements.length)];
   return computerSelection;
+}
+
+function determineScore(playerWin) {
+  if (playerWin === true) {
+    playerScore++;
+    console.log(`Player: ${playerScore} / Computer ${computerScore}`);
+  } else {
+    computerScore++;
+    console.log(`Player: ${playerScore} / Computer ${computerScore}`);
+  }
+}
+
+function gameTie() {
+  console.log(`Player: ${playerScore} / Computer ${computerScore}`);
 }
 
 function capitalize_FirstLetter(string) {
@@ -23,6 +40,8 @@ function playRound(playerSelection, computerSelection) {
         playerSelection
       )}. You Lose!`
     );
+    playerWin = false;
+    determineScore(playerWin);
   } else if (
     (playerSelection === "paper") &
     (computerSelection === "Scissors")
@@ -32,6 +51,8 @@ function playRound(playerSelection, computerSelection) {
         playerSelection
       )}. You Lose!`
     );
+    playerWin = false;
+    determineScore(playerWin);
   } else if (
     (playerSelection === "scissors") &
     (computerSelection === "Rock")
@@ -41,6 +62,8 @@ function playRound(playerSelection, computerSelection) {
         playerSelection
       )}. You Lose!`
     );
+    playerWin = false;
+    determineScore(playerWin);
   } else if (
     (playerSelection === "rock") &
     (computerSelection === "Scissors")
@@ -50,12 +73,16 @@ function playRound(playerSelection, computerSelection) {
         playerSelection
       )} crushes ${computerSelection}. You Win!`
     );
+    playerWin = true;
+    determineScore(playerWin);
   } else if ((playerSelection === "paper") & (computerSelection === "Rock")) {
     console.log(
       `${capitalize_FirstLetter(
         playerSelection
       )} covers ${computerSelection}. You Win!`
     );
+    playerWin = true;
+    determineScore(playerWin);
   } else if (
     (playerSelection === "scissors") &
     (computerSelection === "Paper")
@@ -65,12 +92,15 @@ function playRound(playerSelection, computerSelection) {
         playerSelection
       )} cuts ${computerSelection}. You Win!`
     );
+    playerWin = true;
+    determineScore(playerWin);
   } else {
     console.log(
       `${capitalize_FirstLetter(
         playerSelection
       )} and ${computerSelection}. Tie!`
     );
+    gameTie();
   }
 }
 
