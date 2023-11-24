@@ -1,10 +1,19 @@
 let gameElements = ["Rock", "Paper", "Scissors"];
 let computerPoints = 0;
 let playerPoints = 0;
-let rounds = 0;
+let rounds = 5;
 let computerScore = 0;
 let playerScore = 0;
 let playerWin;
+
+let playerChoices = document.querySelectorAll(".playerChoices, .playerChoice");
+let rock = document.querySelector("#rock");
+let paper = document.querySelector("#paper");
+let scissors = document.querySelector("scissors");
+
+let userScore = document.querySelector(".playerScore");
+let cpuScore = document.querySelector(".cpuScore");
+let referee = document.querySelector(".referee");
 
 function get_computerChoice() {
   const computerSelection =
@@ -15,15 +24,19 @@ function get_computerChoice() {
 function determineScore(playerWin) {
   if (playerWin === true) {
     playerScore++;
-    console.log(`Player: ${playerScore} / Computer ${computerScore}`);
+    userScore.innerHTML = playerScore;
   } else {
     computerScore++;
-    console.log(`Player: ${playerScore} / Computer ${computerScore}`);
+    cpuScore.innerHTML = computerScore;
   }
 }
 
-function gameTie() {
-  console.log(`Player: ${playerScore} / Computer ${computerScore}`);
+function checkWinner() {
+  if (playerScore >= rounds) {
+    referee.innerHTML = "First to 5, YOU WIN!";
+  } else if (computerScore >= rounds) {
+    referee.innerHTML = "First to 5, YOU LOSE!";
+  }
 }
 
 function capitalize_FirstLetter(string) {
@@ -31,80 +44,85 @@ function capitalize_FirstLetter(string) {
 }
 
 function playRound(playerSelection, computerSelection) {
-  playerSelection = prompt("Rock, Paper or Scissors?").toLowerCase();
   computerSelection = get_computerChoice();
 
   if ((playerSelection === "rock") & (computerSelection === "Paper")) {
-    console.log(
-      `${computerSelection} covers ${capitalize_FirstLetter(
-        playerSelection
-      )}. You Lose!`
-    );
+    referee.innerHTML = `${computerSelection} covers ${capitalize_FirstLetter(
+      playerSelection
+    )}. You Lose!`;
+
     playerWin = false;
     determineScore(playerWin);
   } else if (
     (playerSelection === "paper") &
     (computerSelection === "Scissors")
   ) {
-    console.log(
-      `${computerSelection} cuts ${capitalize_FirstLetter(
-        playerSelection
-      )}. You Lose!`
-    );
+    referee.innerHTML = `${computerSelection} covers ${capitalize_FirstLetter(
+      playerSelection
+    )}. You Lose!`;
     playerWin = false;
     determineScore(playerWin);
   } else if (
     (playerSelection === "scissors") &
     (computerSelection === "Rock")
   ) {
-    console.log(
-      `${computerSelection} crushes ${capitalize_FirstLetter(
-        playerSelection
-      )}. You Lose!`
-    );
+    referee.innerHTML = `${computerSelection} crushes ${capitalize_FirstLetter(
+      playerSelection
+    )}. You Lose!`;
+
     playerWin = false;
     determineScore(playerWin);
   } else if (
     (playerSelection === "rock") &
     (computerSelection === "Scissors")
   ) {
-    console.log(
-      `${capitalize_FirstLetter(
-        playerSelection
-      )} crushes ${computerSelection}. You Win!`
-    );
+    referee.innerHTML = `${capitalize_FirstLetter(
+      playerSelection
+    )} crushes ${computerSelection}. You Win!`;
+
     playerWin = true;
     determineScore(playerWin);
   } else if ((playerSelection === "paper") & (computerSelection === "Rock")) {
-    console.log(
-      `${capitalize_FirstLetter(
-        playerSelection
-      )} covers ${computerSelection}. You Win!`
-    );
+    referee.innerHTML = `${capitalize_FirstLetter(
+      playerSelection
+    )} covers ${computerSelection}. You Win!`;
+
     playerWin = true;
     determineScore(playerWin);
   } else if (
     (playerSelection === "scissors") &
     (computerSelection === "Paper")
   ) {
-    console.log(
-      `${capitalize_FirstLetter(
-        playerSelection
-      )} cuts ${computerSelection}. You Win!`
-    );
+    referee.innerHTML = `${capitalize_FirstLetter(
+      playerSelection
+    )} cuts ${computerSelection}. You Win!`;
+
     playerWin = true;
     determineScore(playerWin);
   } else {
-    console.log(
-      `${capitalize_FirstLetter(
-        playerSelection
-      )} and ${computerSelection}. Tie!`
-    );
+    referee.innerHTML = `${capitalize_FirstLetter(
+      playerSelection
+    )} and ${computerSelection}. Tie!`;
     gameTie();
   }
 }
 
-while (rounds < 5) {
-  playRound();
-  rounds++;
+for (let i = 0; i < playerChoices.length; i++) {
+  playerChoices[i].addEventListener("click", (e) => {
+    let selection = playerChoices[i].id;
+    switch (selection) {
+      case "rock":
+        playRound("rock");
+        checkWinner();
+        break;
+      case "paper":
+        playRound("paper");
+        checkWinner();
+        break;
+      case "scissors":
+        playRound("scissors");
+        checkWinner();
+        break;
+    }
+  });
 }
